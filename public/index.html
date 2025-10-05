@@ -8,56 +8,32 @@
         button { padding: 10px 20px; margin: 5px; font-size: 16px; }
         .key-button { font-size: 24px; padding: 20px 40px; }
         #status { margin: 20px 0; }
-        .level-meter {
-            width: 300px;
-            height: 20px;
-            background: #ddd;
-            margin: 10px 0;
-            position: relative;
-        }
-        .level-bar {
-            height: 100%;
-            background: #4CAF50;
-            width: 0%;
-            transition: width 0.1s;
-        }
     </style>
 </head>
 <body>
     <h1>CW Keyer</h1>
 
+    <h2>Tessel Hardware Key</h2>
+    <div id="tesselStatus">Connection: <span id="tesselConnection">Disconnected</span></div>
+    <div id="tesselKeyState" style="font-size: 24px; margin: 10px 0;">
+        Key: <span id="tesselKey" style="font-weight: bold;">UP</span>
+    </div>
+    <div id="tesselLog" style="font-family: monospace; font-size: 12px; color: #666; max-height: 100px; overflow-y: auto;"></div>
+
+    <hr style="margin: 30px 0;">
+
+    <h2>Web Audio Key (Alternative)</h2>
     <div id="status">Status: Stopped</div>
 
     <button id="start">Start Audio</button>
     <button id="stop">Stop Audio</button>
 
-    <h3>Setup</h3>
-    <p style="font-size: 12px; color: #666;">
-        <strong>Wiring:</strong> Connect your morse key between left and right channels of the headphone jack.<br>
-        <strong>How it works:</strong> Tone is always sent to LEFT channel → morse key → returns on RIGHT channel when key pressed.
-    </p>
-
     <h3>Tone Frequency</h3>
     <div>Frequency: <input type="range" id="frequency" min="400" max="1000" value="600"> <span id="freqValue">600</span> Hz</div>
 
-    <h3>Key Input Detection</h3>
-    <div>Mode:
-        <label><input type="radio" name="mode" value="manual" checked> Manual (Button/Spacebar)</label>
-        <label><input type="radio" name="mode" value="auto"> Auto (Detect Key Input)</label>
-    </div>
-    <div id="manualControls">
-        <button id="key" class="key-button">KEY (Hold)</button>
-    </div>
-    <div id="autoControls" style="display: none;">
-        <div>Detection Threshold: <input type="range" id="threshold" min="1" max="50" value="5"> <span id="thresholdValue">5</span></div>
-        <div>Key State: <span id="keyState" style="font-weight: bold;">UP</span></div>
-    </div>
-
-    <h3>Audio Input (Monitoring)</h3>
-    <div class="level-meter">
-        <div class="level-bar" id="levelBar"></div>
-    </div>
-    <div>Input Level: <span id="levelValue">0</span></div>
+    <h3>Manual Key Input</h3>
+    <button id="key" class="key-button">KEY (Hold)</button>
+    <p style="font-size: 12px; color: #666;">Click the button, press spacebar, or use the Tessel hardware key to play tone.</p>
 
     <script type="module" src="app.js"></script>
 </body>
