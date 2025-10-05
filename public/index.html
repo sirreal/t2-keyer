@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CW Keyer</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        button { padding: 10px 20px; margin: 5px; font-size: 16px; }
+        .key-button { font-size: 24px; padding: 20px 40px; }
+        #status { margin: 20px 0; }
+        .level-meter {
+            width: 300px;
+            height: 20px;
+            background: #ddd;
+            margin: 10px 0;
+            position: relative;
+        }
+        .level-bar {
+            height: 100%;
+            background: #4CAF50;
+            width: 0%;
+            transition: width 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <h1>CW Keyer</h1>
+
+    <div id="status">Status: Stopped</div>
+
+    <button id="start">Start Audio</button>
+    <button id="stop">Stop Audio</button>
+
+    <h3>Setup</h3>
+    <p style="font-size: 12px; color: #666;">
+        <strong>Wiring:</strong> Connect your morse key between left and right channels of the headphone jack.<br>
+        <strong>How it works:</strong> Tone is always sent to LEFT channel → morse key → returns on RIGHT channel when key pressed.
+    </p>
+
+    <h3>Tone Frequency</h3>
+    <div>Frequency: <input type="range" id="frequency" min="400" max="1000" value="600"> <span id="freqValue">600</span> Hz</div>
+
+    <h3>Key Input Detection</h3>
+    <div>Mode:
+        <label><input type="radio" name="mode" value="manual" checked> Manual (Button/Spacebar)</label>
+        <label><input type="radio" name="mode" value="auto"> Auto (Detect Key Input)</label>
+    </div>
+    <div id="manualControls">
+        <button id="key" class="key-button">KEY (Hold)</button>
+    </div>
+    <div id="autoControls" style="display: none;">
+        <div>Detection Threshold: <input type="range" id="threshold" min="1" max="50" value="5"> <span id="thresholdValue">5</span></div>
+        <div>Key State: <span id="keyState" style="font-weight: bold;">UP</span></div>
+    </div>
+
+    <h3>Audio Input (Monitoring)</h3>
+    <div class="level-meter">
+        <div class="level-bar" id="levelBar"></div>
+    </div>
+    <div>Input Level: <span id="levelValue">0</span></div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
